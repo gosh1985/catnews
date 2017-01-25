@@ -17,6 +17,8 @@ use app\models\AccountActivation;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Json;
 use yii\web\Response;
+use app\models\Category;
+
 
 
 class MainController extends BehaviorsController
@@ -31,11 +33,16 @@ class MainController extends BehaviorsController
     }
 
     public function actionIndex()
-    {
-
-      return $this->render('index');
-    }
-
+     {
+         $dataProvider = new ActiveDataProvider([
+             'query' => Category::find(),
+             'pagination' => [
+                 'pageSize' => 10,
+             ],
+         ]);
+         $this->view->title = 'News List';
+         return $this->render('index', ['listDataProvider' => $dataProvider]);
+     }
 
     public function actionProfile()
     {
@@ -121,8 +128,8 @@ class MainController extends BehaviorsController
         if (!Yii::$app->user->isGuest):
             return $this->goHome();
         endif;
-      //  $loginWithEmail = Yii::$app->params['loginWithEmail'];
-    //    $model = $loginWithEmail ? new LoginForm(['scenario' => 'loginWithEmail']) : new LoginForm();
+    //   $loginWithEmail = Yii::$app->params['loginWithEmail'];
+    //  $model = $loginWithEmail ? new LoginForm(['scenario' => 'loginWithEmail']) : new LoginForm();
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()):
             return $this->goBack();
@@ -134,6 +141,7 @@ class MainController extends BehaviorsController
             ]
         );
     }
+
     public function actionSearch()
     {
         $search = Yii::$app->session->get('search');

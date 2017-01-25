@@ -1,12 +1,44 @@
 <?php
 
 namespace app\models;
-use yii\db\ActiveRecord;
 
+use Yii;
 
-class Category extends ActiveRecord{
-     public  static function tableName()
-     {
-         return 'category';
-     }
+/**
+ * This is the model class for table "category".
+ *
+ * @property integer $id
+ * @property string $name
+ */
+class Category extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'category';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['name'], 'required'],
+            [['name'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'name' => 'Name',
+        ];
+    }
 }

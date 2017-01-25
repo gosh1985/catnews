@@ -62,7 +62,6 @@ $this->beginPage();
                         data-placement="bottom"
                         data-title="<?= Yii::$app->user->identity['username'] ?>"
                         data-content="
-                            <a href='<?= Url::to(['profile/index']) ?>' data-method='post'>Мой профиль</a><br>
                             <a href='<?= Url::to(['/main/logout']) ?>' data-method='post'>Выход</a>
                         ">
                     <span class="glyphicon glyphicon-user"></span>
@@ -95,7 +94,7 @@ $this->beginPage();
           else:
             $menuItems[] = [
                 'label' => 'Выйти('.Yii::$app->user->identity['username'].')',
-                'url' => ['/main/login'],
+                'url' => ['/main/logout'],
                 'linkOptions'=>['data-method'=>'post'
               ]
             ];

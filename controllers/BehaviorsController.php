@@ -6,6 +6,7 @@ use Yii;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use app\components\MyBehaviors;
+
 class BehaviorsController extends Controller {
     public function behaviors()
     {
@@ -23,34 +24,12 @@ class BehaviorsController extends Controller {
                       'verbs' => ['GET', 'POST'],
                       'roles' => ['@']
                   ],
-                  [
-                      'allow' => true,
-                      'controllers' => ['main'],
-                      'actions' => ['get-telefon'],
-                      'verbs' => ['GET', 'POST'],
-                      'roles' => ['@']
-                  ],
                     [
                         'allow' => true,
                         'controllers' => ['main'],
                         'actions' => ['reg', 'login', 'activate-account'],
                         'verbs' => ['GET', 'POST'],
                         'roles' => ['?']
-                    ],
-
-                    [
-                        'allow' => true,
-                        'controllers' => ['main'],
-                        'actions' => ['some'],
-                        'verbs' => ['GET', 'POST'],
-                        'roles' => ['@']
-                    ],
-                    [
-                        'allow' => true,
-                        'controllers' => ['regions'],
-                        'actions' => ['lists'],
-                        'verbs' => ['GET', 'POST'],
-                        'roles' => ['@']
                     ],
                     [
                         'allow' => true,

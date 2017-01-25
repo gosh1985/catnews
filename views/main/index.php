@@ -14,7 +14,19 @@ use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\grid\DataColumn;
 
+use app\models\News;
+use app\models\Category;
+use yii\widgets\ListView;
+use yii\data\ActiveDataProvider;
+
 ?>
   <code><?= __FILE__ ?></code>
 
 <?=FirstWidget::widget(['a'=>37,'b'=>63]);?>
+
+<?php
+
+echo ListView::widget([
+    'dataProvider' => $listDataProvider,
+    'itemView' => '_list',
+]);?>
