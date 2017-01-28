@@ -18,6 +18,8 @@ use yii\data\ActiveDataProvider;
 use yii\helpers\Json;
 use yii\web\Response;
 use app\models\Category;
+use app\models\News;
+use app\models\NewsSearch;
 
 
 
@@ -27,21 +29,30 @@ class MainController extends BehaviorsController
     public $layout = 'basic';
     public $defaultAction = 'index';
 
-    public function actionAbout()
-    {
-
-    }
-
     public function actionIndex()
      {
-         $dataProvider = new ActiveDataProvider([
-             'query' => Category::find(),
-             'pagination' => [
-                 'pageSize' => 10,
-             ],
-         ]);
-         $this->view->title = 'News List';
-         return $this->render('index', ['listDataProvider' => $dataProvider]);
+      $searchModel = new NewsSearch();
+       $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+      //  $news = News::find()->all();
+      //  $dataProvider = new ActiveDataProvider([
+        //    'query' => Category::find(),
+            // 'pagination' => [
+              //  'pageSize' =>3,
+          //   ],
+      //  ]);
+       //  $this->view->title = 'News List';
+        return $this->render('index', [
+                            // 'listDataProvider' => $dataProvider,
+                              'dataProvider' => $dataProvider,
+                             'searchModel'=>$searchModel,
+                            //  'news'=>$news,
+      ]);
+        //$categories = Category::find()->all();
+      //  return $this->render('index',compact('categories'));
+     }
+     public function actionAll(){
+       $categories = Category::find()->all();
+       return $this->render('all',compact('categories'));
      }
 
     public function actionProfile()

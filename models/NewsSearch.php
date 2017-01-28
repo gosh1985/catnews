@@ -15,11 +15,15 @@ class NewsSearch extends News
     /**
      * @inheritdoc
      */
+    //public $tags;
+    public $tag_name;
+
     public function rules()
     {
         return [
             [['id', 'category_id', 'count', 'rating_plus', 'rating_minus'], 'integer'],
             [['title', 'description', 'time_created', 'image'], 'safe'],
+            [['tag_name'], 'string'],
         ];
     }
 
@@ -42,8 +46,8 @@ class NewsSearch extends News
     public function search($params)
     {
         $query = News::find();
-
-        // add conditions that should always apply here
+      //  $query->joinWith(['tags']);
+         $query->joinWith(['tag_name']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -65,12 +69,14 @@ class NewsSearch extends News
             'count' => $this->count,
             'rating_plus' => $this->rating_plus,
             'rating_minus' => $this->rating_minus,
+            'tag_name'=>$this->tag_name,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'image', $this->image]);
+            ->andFilterWhere(['like', 'image', $this->image])
+            ->andFilterWhere(['like', 'tag_name', $this->tag_name]);
 
-        return $dataProvider;
+       return $dataProvider;
     }
 }

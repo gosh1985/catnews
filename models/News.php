@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\models\TagNews;
+use app\models\TagLib;
 
 /**
  * This is the model class for table "news".
@@ -37,7 +39,8 @@ class News extends \yii\db\ActiveRecord
             [['category_id', 'count', 'rating_plus', 'rating_minus'], 'integer'],
             [['time_created'], 'safe'],
             [['title'], 'string', 'max' => 100],
-            [['description', 'image'], 'string', 'max' => 255],
+            [['image'], 'string', 'max' => 255],
+            [['tag_list'], 'safe'],
         ];
     }
 
@@ -49,13 +52,45 @@ class News extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'category_id' => 'Category ID',
-            'title' => 'Title',
+            'title' => '',
             'description' => 'Description',
             'time_created' => 'Time Created',
             'count' => 'Count',
             'rating_plus' => 'Rating Plus',
             'rating_minus' => 'Rating Minus',
             'image' => 'Image',
+            'tags'=>'Tags',
+            'tag_name'=>'TagName',
         ];
     }
+
+    public function behaviors()
+  {
+      return [
+          [
+              'class' => \app\components\ManyHasManyBehavior::className(),
+              'relations' => [
+                  'tags' => 'tag_list',
+              ],
+          ],
+      ];
+  }
+
+   public function getTags()
+    {
+        return $this->hasMany(TagLib::className(), ['id' => 'tag_id'])
+             ->viaTable('{{%tag_news}}', ['news_id' => 'id']);
+    }
+
+    public function getCategory(){
+    return $this->hasOne(Category::className(),['id'=>'category_id']);
+  }
+
+  public function gettag_name()
+   {
+       return $this->hasMany(TagLib::className(), ['id' => 'tag_id'])
+            ->viaTable('{{%tag_news}}', ['news_id' => 'id']);
+   }
+
+
 }

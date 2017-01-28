@@ -20,13 +20,24 @@ use yii\widgets\ListView;
 use yii\data\ActiveDataProvider;
 
 ?>
-  <code><?= __FILE__ ?></code>
 
-<?=FirstWidget::widget(['a'=>37,'b'=>63]);?>
+<div class="container-fluid">
 
-<?php
+  <div class="row">
 
-echo ListView::widget([
-    'dataProvider' => $listDataProvider,
-    'itemView' => '_list',
-]);?>
+<div class="conteiner">
+  <div class="col-sm-3" style="background-color:white;">
+<?= $this->render('_search',['model'=>$searchModel]);?>
+             </div>
+             <div class="col-sm-9" style="background-color:white;">
+            <?php
+            echo ListView::widget([
+              // 'dataProvider' => $listDataProvider,
+              'dataProvider'=>$dataProvider,
+               'itemView' => '_list',
+            ]);
+            ?>
+            </div>
+</div>
+</div>
+</div>

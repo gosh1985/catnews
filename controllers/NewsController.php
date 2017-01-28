@@ -8,6 +8,8 @@ use app\models\NewsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use sbs\helpers\TransliteratorHelper;
 
 /**
  * NewsController implements the CRUD actions for News model.
@@ -44,6 +46,11 @@ class NewsController extends Controller
         ]);
     }
 
+    public function actionShow($id){
+              $newsDetail = News::findOne($id);
+                 return $this->render('show',compact('newsDetail'));
+    }
+
     /**
      * Displays a single News model.
      * @param integer $id
@@ -61,18 +68,40 @@ class NewsController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
-    {
-        $model = new News();
+     public function actionCreate()
+       {
+           $model = new News();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
-    }
+           if ($model->load(Yii::$app->request->post()))
+           {
+             $model->time_created = date('Y-m-d h:i:s');
+             $imageName =TransliteratorHelper::process($model->title, 'en'); 
+
+
+           // if(!empty($model->file))
+         //   {
+              $model->image = UploadedFile::getInstance($model,'image');
+              $model->image->saveAs('uploads/'.$imageName.'.'.$model->image->extension );
+              //save the path in the db column
+              $model->image = 'uploads/'.$imageName.'.'.$model->image->extension ;
+         //  }
+
+
+                if($model->save()){
+                   return $this->redirect(['view', 'id' => $model->id]);
+                  }else{
+                      // show errors
+                      var_dump($model->getErrors());
+                      exit;
+                  }
+                           //  $model->save(false);
+             //  return $this->redirect(['view', 'id' => $model->id]);
+           } else {
+               return $this->render('create', [
+                   'model' => $model,
+               ]);
+           }
+       }
 
     /**
      * Updates an existing News model.

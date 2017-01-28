@@ -14,31 +14,31 @@
 }
 #main-menu.navbar-default {
     font-size: 14px;
-    background-color: rgba(51, 122, 183, 1);
+    background-color: rgba(255,255,0,0.5);
     border-width: 0px;
     border-radius: 0px;
 }
 #main-menu.navbar-default .navbar-nav>li>a {
     color: rgba(255, 255, 255, 1);
-    background-color: rgba(51, 122, 183, 1);
+    background-color: rgba(255,255,0,0.5);
 }
 #main-menu.navbar-default .navbar-nav>li>a:hover,
 #main-menu.navbar-default .navbar-nav>li>a:focus {
     color: rgba(195, 212, 227, 1);
-    background-color: rgba(51, 122, 183, 1);
+    background-color: rgba(255,255,0,0.5);
 }
 #main-menu.navbar-default .navbar-nav>.active>a,
 #main-menu.navbar-default .navbar-nav>.active>a:hover,
 #main-menu.navbar-default .navbar-nav>.active>a:focus {
     color: rgba(255, 255, 255, 1);
-    background-color: rgba(63, 114, 158, 1);
+    background-color: rgba(255,255,0,0.5);
 }
 #main-menu.navbar-default .navbar-toggle {
     border-color: #fff;
 }
 #main-menu.navbar-default .navbar-toggle:hover,
 #main-menu.navbar-default .navbar-toggle:focus {
-    background-color: #3f729e;                           //#3f729e
+    background-color: #ffff80;                           //#3f729e
 }
 #main-menu.navbar-default .navbar-toggle .icon-bar {
     background-color: #fff;

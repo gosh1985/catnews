@@ -7,6 +7,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 use app\components\AlertWidget;
 use yii\helpers\Url;
+
 /**
  * Created by PhpStorm.
  * User: phpNT
@@ -43,7 +44,7 @@ $this->beginPage();
                     'class' => 'container'
                 ],
               //  'brandLabel' => '<img src="'.\Yii::$app->request->BaseUrl.'/img/brand.gif"/>',
-              'brandLabel'=>'<span class="label label-info">moneyCan</span>',
+              'brandLabel'=>'<span class="label label-info">^^catNews</span>',
                 'brandUrl' => [
                     '/main/index'
                 ],
@@ -108,7 +109,7 @@ $this->beginPage();
             ]
         ]);
         Modal::begin([
-            'header' => '<h2>phpNT</h2>',
+            'header' => '<h2>catNews</h2>',
             'id' => 'modal'
         ]);
         echo 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.
@@ -147,8 +148,15 @@ $this->beginPage();
         NavBar::end();
         ?>
         <div class="container">
-            <?= AlertWidget::widget() ?>
+                <div class="col-sm-2">
+                </div>
+
+                <div class="col-sm-8">
             <?= $content ?>
+                </div>
+
+                <div class="col-sm-2">
+                </div>
         </div>
     </div>
 
