@@ -9,5 +9,11 @@ use yii\helpers\Html;
  </div>
   <div class = "col-sm-6">
       <p><?=$newsDetail->description?></p>
+      <ul class="list-inline">
+    <?php foreach($newsDetail->tags as $itemTag):?>
+            <li>  <span class="label label-info"><?php echo $itemTag->tag_name;?></span> </li>
+                <?php endforeach;?>
+                
+     </ul>
   </div>
 </div>

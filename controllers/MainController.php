@@ -13,7 +13,6 @@ use yii\web\BadRequestHttpException;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\models\AccountActivation;
-
 use yii\data\ActiveDataProvider;
 use yii\helpers\Json;
 use yii\web\Response;
@@ -33,22 +32,14 @@ class MainController extends BehaviorsController
      {
       $searchModel = new NewsSearch();
        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-      //  $news = News::find()->all();
-      //  $dataProvider = new ActiveDataProvider([
-        //    'query' => Category::find(),
-            // 'pagination' => [
-              //  'pageSize' =>3,
-          //   ],
-      //  ]);
-       //  $this->view->title = 'News List';
+       $categories = Category::find()->all();
         return $this->render('index', [
-                            // 'listDataProvider' => $dataProvider,
+
                               'dataProvider' => $dataProvider,
                              'searchModel'=>$searchModel,
-                            //  'news'=>$news,
+                              'categories'=>$categories,
       ]);
-        //$categories = Category::find()->all();
-      //  return $this->render('index',compact('categories'));
+
      }
      public function actionAll(){
        $categories = Category::find()->all();

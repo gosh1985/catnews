@@ -8,6 +8,7 @@ use app\models\CategorySearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\ForbiddenHttpException;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -70,6 +71,7 @@ class CategoryController extends Controller
      */
     public function actionCreate()
     {
+      if(Yii::$app->user->can('create-category')){
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -79,6 +81,10 @@ class CategoryController extends Controller
                 'model' => $model,
             ]);
         }
+      }else{
+        throw new ForbiddenHttpException;
+      }
+
     }
 
     /**

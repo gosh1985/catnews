@@ -60,7 +60,7 @@ class News extends \yii\db\ActiveRecord
             'rating_minus' => 'Rating Minus',
             'image' => 'Image',
             'tags'=>'Tags',
-            'tag_name'=>'TagName',
+            'tag_name'=>'',
         ];
     }
 

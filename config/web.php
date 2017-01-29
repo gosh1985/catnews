@@ -28,6 +28,10 @@ $config = [
             'enableAutoLogin' => true,
             'loginUrl'=>['main/login'],
         ],
+        'authManager' => [
+           'class' => 'yii\rbac\DbManager',
+           'defaultRoles'=>['guest'],
+       ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

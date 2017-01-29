@@ -26,7 +26,7 @@ $tagName = ArrayHelper::getColumn(Taglib::find()->all(),'tag_name' );
 
     <?= $form->field($model, 'tag_name')->widget(TypeaheadBasic::className(),['data'=>$tagName,
     'pluginOptions' => ['highlight' => true],
-    'options' => ['placeholder' => 'Выберите тег...'],
+    'options' => ['placeholder' => 'Новости по тегу...'],
     ])?>
 
     <div class="form-group">

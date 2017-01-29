@@ -139,7 +139,7 @@ $this->beginPage();
         echo Html::submitButton(
             '<span class="glyphicon glyphicon-search"></span>',
             [
-                'class' => 'btn btn-success',
+                'class' => 'btn btn-default',
                 'onClick' => 'window.location.href = this.form.action + "-" + this.form.search.value.replace(/[^\w\а-яё\А-ЯЁ]+/g, "_") + ".html";'
             ]
         );
@@ -162,10 +162,7 @@ $this->beginPage();
 
     <footer class="footer">
         <div class="container">
-         <span class="badge">
-               <span class="glyphicon glyphicon-copyright-mark"></span> BANK <?= date('Y') ?>
-        </span>
-        <span class="label label-info">moneyCan</span>
+        <span class="label label-info">^^catNews</span>
         </div>
     </footer>
 

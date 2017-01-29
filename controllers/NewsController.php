@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use sbs\helpers\TransliteratorHelper;
+use yii\web\ForbiddenHttpException;
 
 /**
  * NewsController implements the CRUD actions for News model.
@@ -51,6 +52,18 @@ class NewsController extends Controller
                  return $this->render('show',compact('newsDetail'));
     }
 
+    public function actionRatingplus($id){
+              $row = News::findOne($id);
+              $row->rating_plus = $row->rating_plus + 1;
+              $row->save();
+  }
+
+    public function actionRatingminus($id){
+              $row = News::findOne($id);
+              $row->rating_minus = $row->rating_minus - 1;
+              $row->save();
+  }
+
     /**
      * Displays a single News model.
      * @param integer $id
@@ -70,12 +83,13 @@ class NewsController extends Controller
      */
      public function actionCreate()
        {
+         if(Yii::$app->user->can('create-news')){
            $model = new News();
 
            if ($model->load(Yii::$app->request->post()))
            {
              $model->time_created = date('Y-m-d h:i:s');
-             $imageName =TransliteratorHelper::process($model->title, 'en'); 
+             $imageName =TransliteratorHelper::process($model->title, 'en');
 
 
            // if(!empty($model->file))
@@ -101,6 +115,10 @@ class NewsController extends Controller
                    'model' => $model,
                ]);
            }
+         }else{
+           throw new ForbiddenHttpException;
+         }
+
        }
 
     /**
