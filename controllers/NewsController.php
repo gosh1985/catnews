@@ -54,14 +54,12 @@ class NewsController extends Controller
 
     public function actionRatingplus($id){
               $row = News::findOne($id);
-              $row->rating_plus = $row->rating_plus + 1;
-              $row->save();
+              $row->updateCounters(['rating_plus' => 1]);
   }
 
     public function actionRatingminus($id){
               $row = News::findOne($id);
-              $row->rating_minus = $row->rating_minus - 1;
-              $row->save();
+              $row->updateCounters(['rating_minus' => -1]);
   }
 
     /**

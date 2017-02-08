@@ -35,9 +35,9 @@ class MainController extends BehaviorsController
        $categories = Category::find()->all();
         return $this->render('index', [
 
-                              'dataProvider' => $dataProvider,
-                             'searchModel'=>$searchModel,
-                              'categories'=>$categories,
+                'dataProvider' => $dataProvider,
+                'searchModel'=>$searchModel,
+                'categories'=>$categories,
       ]);
 
      }
@@ -109,7 +109,7 @@ class MainController extends BehaviorsController
             throw new BadRequestHttpException($e->getMessage());
         }
         if($user->activateAccount()):
-            Yii::$app->session->setFlash('success', 'Активация прошла успешно. <strong>'.Html::encode($user->username).'</strong> вы теперь с phpNT!!!');
+            Yii::$app->session->setFlash('success', 'Активация прошла успешно. <strong>'.Html::encode($user->username).'</strong> вы теперь с catNews!!!');
         else:
             Yii::$app->session->setFlash('error', 'Ошибка активации.');
             Yii::error('Ошибка при активации.');

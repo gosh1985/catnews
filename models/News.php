@@ -29,6 +29,13 @@ class News extends \yii\db\ActiveRecord
         return 'news';
     }
 
+  public function scenarios()
+  {
+     $scenarios = parent::scenarios();
+     $scenarios['ratingchange'] = ['rating_plus','rating_minus'];//Scenario Values Only Accepted
+     return $scenarios;
+
+  }
     /**
      * @inheritdoc
      */
@@ -67,12 +74,13 @@ class News extends \yii\db\ActiveRecord
     public function behaviors()
   {
       return [
-          [
+        'manyToMany' =>  [
               'class' => \app\components\ManyHasManyBehavior::className(),
               'relations' => [
-                  'tags' => 'tag_list',
+                  'tags' =>'tag_list'
+                ],
               ],
-          ],
+
       ];
   }
 

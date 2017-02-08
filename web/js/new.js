@@ -3,6 +3,7 @@ $('.pluss').click(function() {
         var me = $(this);
         a = me.attr('id');
        $.post("/catnews/news/ratingplus?id="+ a);
+       $(this).html(+1);
     });
 
 $('.minuss').click(function() {

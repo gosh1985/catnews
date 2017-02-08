@@ -39,6 +39,8 @@ use yii\data\ActiveDataProvider;
 
 endforeach;?>
   <?php endforeach;?>
+  
+
                  </div>
 
              <div class="col-sm-8" style="background-color:white;">
