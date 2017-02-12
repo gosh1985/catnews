@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use sbs\helpers\TransliteratorHelper;
 use yii\web\ForbiddenHttpException;
+use app\models\Comment;
 
 /**
  * NewsController implements the CRUD actions for News model.
@@ -49,17 +50,81 @@ class NewsController extends Controller
 
     public function actionShow($id){
               $newsDetail = News::findOne($id);
-                 return $this->render('show',compact('newsDetail'));
+            //  $newsComments = Comment::findAll(['news_id' => $id]);
+
+              $newsComments  = Comment::find()
+                      ->where(['news_id' => $id])
+                      ->orderBy('created_at')
+                      ->all();
+               return $this->render('show',compact('newsDetail','newsComments'));
     }
+
+
+
+
+
 
     public function actionRatingplus($id){
               $row = News::findOne($id);
               $row->updateCounters(['rating_plus' => 1]);
+              return $row->rating_plus;
   }
 
     public function actionRatingminus($id){
               $row = News::findOne($id);
               $row->updateCounters(['rating_minus' => -1]);
+              return $row->rating_minus;
+  }
+
+  public function actionCommentCreate($id = null)
+  {
+      $this->layout = 'modallayout';
+      $model = new Comment();
+
+      if ($model->load(Yii::$app->request->post())) {
+          $model->user_id = Yii::$app->user->getId();
+          $session = Yii::$app->session;
+          $session->open();
+          $model->news_id = $session['newsId'];
+        //  $model->parent_id = $id;
+          if($model->save()){
+              return $this->redirect(['news/show', 'id' =>
+              $model->news_id
+            ]);
+              $session->remove('newsId');
+              }
+        } else {
+          return $this->render(
+            'comment-create', [
+              'model' => $model,
+          ]);
+      }
+  }
+
+  public function actionSubCommentCreate()
+  {
+      $this->layout = 'modallayout';
+      $model = new Comment();
+
+      if ($model->load(Yii::$app->request->post())) {
+          $model->user_id = Yii::$app->user->getId();
+          $session = Yii::$app->session;
+          $session->open();
+          $model->news_id = $session['newsId'];
+          $model->parent_id = $session['parentId'];
+          if($model->save()){
+              return $this->redirect(['news/show', 'id' =>
+              $model->news_id
+            ]);
+              $session->remove('newsId');
+              $session->remove('parentId');
+              }
+        } else {
+          return $this->render(
+            'sub-comment-create', [
+              'model' => $model,
+          ]);
+      }
   }
 
     /**

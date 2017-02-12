@@ -20,15 +20,15 @@ use app\models\TagLib;
       <ul class="list-inline">
     <?php foreach($model->tags as $itemTag):?>
             <li>  <span class="label label-info"><?=
-
             $itemTag->tag_name
             ?></span> </li>
                 <?php endforeach;?>
                 <li>
-                <div class = "pluss" id="<?=$model->id?>"><span class=" glyphicon glyphicon-thumbs-up" ></span><?=' ';?><?= $model->rating_plus;?></div>
+                <div class = "pluss" id="<?=$model->id?>"><span class=" glyphicon glyphicon-thumbs-up" ></span><?=' ';?><a><?= $model->rating_plus;?></a></div>
                 </li>
+
                 <li>
-                  <span class="minuss glyphicon glyphicon-thumbs-down" id="<?=$model->id?>"></span><?=' '; echo $model->rating_minus;?>
+                <div class = "minuss" id="<?=$model->id?>"><span class=" glyphicon glyphicon-thumbs-down" ></span><?=' ';?><a><?= $model->rating_minus;?></a></div>
                 </li>
      </ul>
      <hr>

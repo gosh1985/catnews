@@ -2,14 +2,17 @@
 $('.pluss').click(function() {
         var me = $(this);
         a = me.attr('id');
-       $.post("/catnews/news/ratingplus?id="+ a);
-       $(this).html(+1);
+       $.post("/catnews/news/ratingplus?id="+ a,function(data){
+               me.closest("div").find("a").html(data);
+          });
     });
 
 $('.minuss').click(function() {
         var me = $(this);
         a = me.attr('id');
-       $.post("/catnews/news/ratingminus?id="+ a);
+       $.post("/catnews/news/ratingminus?id="+ a,function(data){
+               me.closest("div").find("a").html(data);
+          });
     });
 
 

@@ -24,7 +24,8 @@
         "sbs/yii2-transliterator-helper": "^0.2.0",
         "kartik-v/yii2-widget-typeahead": "*",
         "guzzlehttp/guzzle": "~6.0",
-        "electrolinux/phpquery": "^0.9.6"
+        "electrolinux/phpquery": "^0.9.6",
+        "mihaildev/yii2-ckeditor": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

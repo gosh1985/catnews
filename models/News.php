@@ -100,5 +100,9 @@ class News extends \yii\db\ActiveRecord
             ->viaTable('{{%tag_news}}', ['news_id' => 'id']);
    }
 
+   public function getComments(){
+     return $this->hasMany(Comment::className(),['news_id'=>'id']);
+   }
+
 
 }
