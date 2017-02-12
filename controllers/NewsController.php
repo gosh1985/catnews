@@ -52,16 +52,14 @@ class NewsController extends Controller
               $newsDetail = News::findOne($id);
             //  $newsComments = Comment::findAll(['news_id' => $id]);
 
-              $newsComments  = Comment::find()
+
+            $newsComments = Comment::find()
                       ->where(['news_id' => $id])
                       ->orderBy('created_at')
                       ->all();
+          //  $newsComments = $this->getStructure($var);
                return $this->render('show',compact('newsDetail','newsComments'));
     }
-
-
-
-
 
 
     public function actionRatingplus($id){

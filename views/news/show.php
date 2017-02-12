@@ -8,7 +8,6 @@ use app\models\News;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\models\Comment;
-use yii\widgets\Menu;
  ?>
 
 <div class = "container">
@@ -44,6 +43,7 @@ use yii\widgets\Menu;
        Modal::end();
 
   ?>
+
 <!-- here should be some comment-->
 <?php foreach($newsComments as $com):?>
  <div class="panel panel-default col-sm-12">
@@ -54,7 +54,7 @@ use yii\widgets\Menu;
    </div>
  </div>
  <?php endforeach;?>
-<!-- here should be some comment-->
+ <!-- here should be some comment-->
  <?php
 
    Modal::begin([
