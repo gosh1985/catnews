@@ -12,6 +12,7 @@ use yii\web\UploadedFile;
 use sbs\helpers\TransliteratorHelper;
 use yii\web\ForbiddenHttpException;
 use app\models\Comment;
+use app\models\Category;
 
 /**
  * NewsController implements the CRUD actions for News model.
@@ -50,13 +51,13 @@ class NewsController extends Controller
 
     public function actionShow($id){
               $newsDetail = News::findOne($id);
-            //  $newsComments = Comment::findAll(['news_id' => $id]);
+              $newsComments = Comment::findAll(['news_id' => $id]);
 
-
-            $newsComments = Comment::find()
-                      ->where(['news_id' => $id])
-                      ->orderBy('created_at')
-                      ->all();
+          // $newsComments = new Comment;
+          // $newsComments = Comment::find()
+            //      ->where(['news_id' => $id])
+            //         ->orderBy('created_at')
+            //         ->all();
           //  $newsComments = $this->getStructure($var);
                return $this->render('show',compact('newsDetail','newsComments'));
     }
@@ -74,7 +75,7 @@ class NewsController extends Controller
               return $row->rating_minus;
   }
 
-  public function actionCommentCreate($id = null)
+  public function actionCommentCreate()
   {
       $this->layout = 'modallayout';
       $model = new Comment();
@@ -99,7 +100,7 @@ class NewsController extends Controller
       }
   }
 
-  public function actionSubCommentCreate()
+  public function actionSubCommentCreate($id)
   {
       $this->layout = 'modallayout';
       $model = new Comment();
@@ -109,13 +110,12 @@ class NewsController extends Controller
           $session = Yii::$app->session;
           $session->open();
           $model->news_id = $session['newsId'];
-          $model->parent_id = $session['parentId'];
+          $model->parent_id = $id;
           if($model->save()){
               return $this->redirect(['news/show', 'id' =>
               $model->news_id
             ]);
               $session->remove('newsId');
-              $session->remove('parentId');
               }
         } else {
           return $this->render(

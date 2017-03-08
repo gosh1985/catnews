@@ -8,6 +8,7 @@ use app\models\News;
 use yii\bootstrap\Modal;
 use yii\helpers\Url;
 use yii\models\Comment;
+use app\components\TreeCommentWidget;
  ?>
 
 <div class = "container">
@@ -41,36 +42,27 @@ use yii\models\Comment;
     $session->open();
     $session['newsId']=$newsDetail->id;
        Modal::end();
-
   ?>
 
-<!-- here should be some comment-->
-<?php foreach($newsComments as $com):?>
- <div class="panel panel-default col-sm-12">
-   <div class="panel-body ">
-    <?=$com->text;?>
-    <?= Html::button('<span class="glyphicon glyphicon-comment"> <b>Обсудить</b></span>',
-     ['value'=>Url::to('sub-comment-create'),'class' => 'btn btn-success btn-xs position_right modalButtonDiscussion']) ?>
-   </div>
- </div>
- <?php endforeach;?>
- <!-- here should be some comment-->
- <?php
+  <!-- here should be some comment-->
+<?=TreeCommentWidget::widget(['model' => $newsComments]);;?>
 
-   Modal::begin([
-   'header' => '<h2>Оставь комментарий</h2>',
-   'id'=>'modalDiscussionCreate',
-   'size'=>'modal-md',
-   ]);
+<?php
 
-   echo ' <div id="modalDiscussion"></div>';
-   $session = Yii::$app->session;
+  Modal::begin([
+  'header' => '<h2>Оставь комментарий</h2>',
+  'id'=>'modalDiscussionCreate',
+  'size'=>'modal-md',
+  ]);
+
+  echo ' <div id="modalDiscussion"></div>';
+  $session = Yii::$app->session;
 $session->open();
-$session['parentId']=$com->id;
 $session['newsId']=$newsDetail->id;
-   Modal::end();
+  Modal::end();
 
 ?>
 
   </div>
 </div>
+<a href="#" class="scrollup">Наверх</a>

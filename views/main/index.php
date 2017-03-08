@@ -39,7 +39,7 @@ use yii\data\ActiveDataProvider;
 
 endforeach;?>
   <?php endforeach;?>
-  
+
 
                  </div>
 
@@ -53,6 +53,13 @@ endforeach;?>
             ]);
             ?>
             </div>
+
+        <?php    $objPHPExcel = \PHPExcel_IOFactory::load('ukr.csv');
+          $sheetData = $objPHPExcel->getActiveSheet()->toArray(null, true, true, true);
+          echo'<pre>';
+          print_r($sheetData);
+          echo'</pre>';
+          ?>
 </div>
-</div>
+</div>та
 </div>

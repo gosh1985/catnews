@@ -20,6 +20,8 @@ class AppAsset extends AssetBundle
     public $css = [
         'css/site.css?2',
         'css/main.css?2',
+        'css/comment_style.css?2',
+        'css/for_scrol.css',
 
     ];
     public $js = [
@@ -27,6 +29,7 @@ class AppAsset extends AssetBundle
       'js/modal.js?2',
       'js/new.js?2',
       'js/modal2.js',
+      'js/for_scrol.js',
 
 
     ];

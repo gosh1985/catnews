@@ -1,0 +1,17 @@
+.comment-with-border {
+
+                       border-radius: 10px;
+                       box-shadow: 0 0 7px 3px #9999ff;
+                       text-indent: 30px;
+                       padding: 5px 20px 5px 20px;
+                       margin: 20px auto;
+                       width: auto;
+                    }
+
+  li{
+   list-style-type: none; /* Убираем маркеры */
+  }
+  ul {
+    list-style-type: none;
+    margin: 5px 2px 50px 50px;
+  }
